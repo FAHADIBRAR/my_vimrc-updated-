@@ -1,0 +1,87 @@
+ " Initialize vim-plug plugin manager
+call plug#begin('C:\Users\Zishan\vimfiles\plugged')
+
+" Plugins
+Plug 'preservim/nerdtree'
+Plug 'searleser97/cpbooster.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'jiangmiao/auto-pairs'        " Auto-pairs plugin for parentheses/brackets
+Plug 'tpope/vim-dispatch'
+Plug '907th/vim-auto-save'
+
+Plug 'ozankasikci/vim-man'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes' " Optional for themes
+call plug#end()
+
+syntax enable
+set background=light               " Use 'light' for Solarized light mode
+colorscheme solarized
+
+" Configure UltiSnips
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
+" Line numbering
+set number                         " Show line numbers
+set relativenumber                 " Enable relative line numbers
+
+" Syntax highlighting and file type detection
+filetype plugin indent on          " Enable file type detection and indentation
+
+" Indentation settings
+set tabstop=4                      " Tab width
+set shiftwidth=4                   " Auto-indent width
+set softtabstop=4                  " Soft tab width
+set expandtab                      " Convert tabs to spaces
+set smartindent                    " Enable smart indentation
+set autoindent                     " Maintain indentation of the previous line
+
+" Escape shortcut
+inoremap jj <Esc>
+
+" Set cursor color to red (only for GUI Vim, e.g., GVim)
+highlight Cursor guifg=white guibg=blue
+set guicursor=n-v-c:hor20,i-ci-ve:ver25,r-cr-o:hor20
+" Compile and run C++ code with F5 (Windows-compatible)
+nnoremap <F5> :w<CR>:!g++ % -o %< && %< <CR>
+" Highlight matching parentheses
+set showmatch                      " Briefly highlight matching brackets
+
+" Highlight the current line
+set cursorline                     " Highlight the current line
+
+" Enable mouse support
+set mouse=a                        " Enable mouse in all modes
+
+" Enable clipboard support
+set clipboard=unnamedplus          " Use system clipboard
+
+" Search settings
+set ignorecase                     " Ignore case in searches...
+set smartcase                      " ...unless uppercase is used
+
+" Font for GVim
+if has('gui_running')
+  set guifont=Consolas:h18:b       " Set font to Consolas, size 18, bold
+endif
+
+" Move out of auto-pairs with Tab in insert mode
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Right>"
+
+" Auto-save on focus lost
+autocmd FocusLost * :wa
+
+" Enable auto-save plugin
+let g:auto_save = 1
+let g:auto_save_interval = 300     " Auto-save every 5 minutes
+
+" Fast save mapping
+nnoremap <Leader>w :w<CR>
+
+" Auto-indent settings for C++ files
+autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab smartindent
+
+
